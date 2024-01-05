@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>投稿一覧</h1>
+<form method="get">
+    <label for="category">Choose a category:</label>
+    <select name="category" id="category">
+        <option value="">All Category</option>
+        {% for something in categories %}
+        <option value="{{ something.name }}">{{ something.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Filter">
+</form>
+
+    <ul>
+    {% for post in posts %}
+    <li>
+        {{ post.title }}
+    </li>
+    <li>
+        {{ post.content }}
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% endif %}
+    </li>
+    <li>
+        {{ post.created_at }}
+    </li>
+    {% endfor %}
+    </ul>
+
+<a href="{% url 'blog_post_create' %}">New Post</a>
+
+
+
+
+
+
+{% endblock %}
